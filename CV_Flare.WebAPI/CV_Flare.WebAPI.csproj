@@ -16,4 +16,8 @@
     <ProjectReference Include="..\CV_Flare.Infrastructure\CV_Flare.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
