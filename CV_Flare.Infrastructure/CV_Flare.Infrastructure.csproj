@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CV_Flare.Application\CV_Flare.Application.csproj" />
     <ProjectReference Include="..\CV_FLare.Domain\CV_FLare.Domain.csproj" />
   </ItemGroup>
