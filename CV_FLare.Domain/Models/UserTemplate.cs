@@ -1,35 +1,44 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CV_FLare.Domain.Models;
 
-public partial class UserTemplate
+public class UserTemplate
 {
+    [Key]
     public int UserTemplatesId { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
-    public int? TemplateId { get; set; }
+    [ForeignKey("UserId")]
+    public virtual User User { get; set; } = null!;
 
-    public string? CvName { get; set; }
+    public int TemplateId { get; set; }
 
-    public string? TemplateContent { get; set; }
+    [ForeignKey("TemplateId")]
+    public virtual Template Template { get; set; } = null!;
 
-    public int? JobDescId { get; set; }
+    [Required]
+    public string CvName { get; set; } = null!;
 
-    public int? AiScore { get; set; }
+    [Required]
+    public string TemplateContent { get; set; } = null!;
 
-    public bool? IsDraft { get; set; }
+    public int JobDescId { get; set; }
+
+    [ForeignKey("JobDescId")]
+    public virtual JobDescription JobDesc { get; set; } = null!;
+
+    public int AiScore { get; set; }
+
+    public bool IsDraft { get; set; }
 
     public int? TemplateProgress { get; set; }
 
-    public DateTime? CreateAt { get; set; }
+    public DateTime CreateAt { get; set; }
 
     public DateTime? UpdateAt { get; set; }
-
-    public virtual JobDescription? JobDesc { get; set; }
-
-    public virtual Template? Template { get; set; }
-
-    public virtual User? User { get; set; }
 }

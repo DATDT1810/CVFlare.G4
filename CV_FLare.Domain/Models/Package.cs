@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CV_FLare.Domain.Models;
 
-public partial class Package
+public class Package
 {
+    [Key]
     public int PackageId { get; set; }
 
-    public string? PackageName { get; set; }
+    [Required]
+    [MaxLength(100)]
+    public string PackageName { get; set; }
+    [Required]
+    public string PackageDescription { get; set; }
 
-    public string? PackageDescription { get; set; }
+    [Column(TypeName = "decimal(10, 2)")]
+    public decimal PackagePrice { get; set; }
 
-    public decimal? PackagePrice { get; set; }
-
-    public DateTime? CreateAt { get; set; }
+    public DateTime CreateAt { get; set; }
 
     public DateTime? UpdateAt { get; set; }
 
