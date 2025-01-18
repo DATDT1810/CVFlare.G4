@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CV_FLare.Domain.Models;
 
-public partial class JobDescription
+public class JobDescription
 {
+    [Key]
     public int JobDescId { get; set; }
+    [Required]
+    [MaxLength(255)]
+    public string JobTitle { get; set; }
+    [Required, MaxLength(255)]
+    public string Description { get; set; }
 
-    public string? JobTitle { get; set; }
-
-    public string? JobDescription1 { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public DateTime? UpdateAt { get; set; }
 
