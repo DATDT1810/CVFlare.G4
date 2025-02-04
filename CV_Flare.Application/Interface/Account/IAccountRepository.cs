@@ -1,5 +1,6 @@
 ﻿using CV_Flare.Application.DTOs;
 using CV_FLare.Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,11 @@ namespace CV_Flare.Application.Interface.Account
 
         Task<IEnumerable<User>> GetAllUserAsync();
         Task<User> GetUserByEmailAsync(string email);
-        Task<User> GetUserByIdAsync(int id);    
+        Task<User> GetUserByIdAsync(int id);
+
+        Task<UserProfileDTO> GetUserProfile(string email);
+        Task<UserProfileDTO> UpdateUserProfile(UserProfileDTO userProfileDTO);
+        //Task<string> UploadUserImageAsync(IFormFile file, string email);
 
     }
 }

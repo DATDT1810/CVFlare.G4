@@ -20,6 +20,12 @@ namespace CV_Flare.Infrastructure.Helper
            .ForMember(dest => dest.UserPassword, opt => opt.MapFrom(src => src.Password))
            .ReverseMap()
            .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.UserPassword));
+
+            // Mapping Profile
+            CreateMap<User, UserProfileDTO>().ReverseMap();
+
+            // Mapping Packages
+            CreateMap<Package, PackagesDTO>().ReverseMap();
         }
     }
 }
