@@ -2,50 +2,227 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CV_Flare.RazorPage</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CV_Flare.RazorPage.styles.css" asp-append-version="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"]</title>
+    <!-- Favicon -->
+    <link rel="icon" href="~/img/core-img/favicon.ico" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="~/css/job.css">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+
+    <!-- Owl Stylesheets -->
+    <link rel="stylesheet" href="css/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owlcarousel/owl.theme.default.min.css">
+
+    <!-- Responsive Stylesheet --> 
+    <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body class="light-version">
+    <!-- Phần tải trước -->
+    <div id="preloader">
+        <div class="preload-content">
+            <div id="dream-load"></div>
+        </div>
+    </div>
+    <!-- ##### Khu vực tiêu đề bắt đầu ##### -->
+    <header class="header-area">
+        <div class="classy-nav-container dark breakpoint-off">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">CV_Flare.RazorPage</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- Menu chính -->
+                <nav class="classy-navbar justify-content-between" id="dreamNav" >
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="~/Index"><img src="~/img/logocvflare.png" alt="logo" style="width:150px"></a>
+
+                    <!-- Nút bật menu -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Nút đóng -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Menu bắt đầu -->
+                        <div class="classynav">
+                            <ul class="classynav">
+                                <li><a asp-page="/Job">Công việc</a></li>
+                                <li class="nav-item dropdown hoverable">
+                                    <a class="nav-link dropdown-toggle nav_header" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dịch Vụ
+                                    </a>
+                                    <div class="dropdown-menu tdropdown" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-page="/Template">Tạo CV</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-page="/Packages/PackagesCV">Chỉnh sửa CV</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown hoverable">
+                                    <a class="nav-link dropdown-toggle nav_header" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Hồ sơ
+                                    </a>
+                                    <div class="dropdown-menu tdropdown" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="templates.html">Quản lý CV</a>
+                                    </div>
+                                </li>
+                                <li><a asp-page="/AboutUs">Về Chúng Tôi</a></li>
+                            </ul>
+
+                            @{
+                                var token = Context.Request.Cookies["accessToken"];
+                                var isLoggedIn = !string.IsNullOrEmpty(token);
+                            }
+                            @if (isLoggedIn)
+                            {
+                                <li class="nav-item dropdown hoverable">
+                                    <a class="nav-link dropdown-toggle nav_header" id="navbarDropdownProfile" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/img/" alt="Profile" class="profile-image-nav" style="width:35px; border-radius:50%"> @ViewData["token"]
+                                    </a>
+                                    <div class="dropdown-menu tdropdown" aria-labelledby="navbarDropdownProfile">
+                                        <a class="dropdown-item" href="~/User/UserProfile">Cài đặt thông tin cá nhân</a>
+                                        <div class="dropdown-divider"></div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-danger" href="~/Logout">Đăng xuất</a>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <!-- Nút -->
+                                <a href="/Login" class="btn login-btn mr-im">Đăng Nhập</a>
+                                <a href="/Register" class="btn login-btn">Đăng Ký</a>
+                            }
+                        </div>
+                        <!-- Menu kết thúc -->
+                    </div>
+                </nav>
             </div>
-        </nav>
+        </div>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - CV_Flare.RazorPage - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <!-- ##### Khu vực chân trang bắt đầu ##### -->
+    <footer class="footer-area bg-img">
+        <div class="footer-content-area mt-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-4 col-md-6">
+                        <div class="footer-copywrite-info">
+                            <!-- Bản quyền -->
+                            <div class="copywrite_text fadeInUp" data-wow-delay="0.2s">
+                                <div class="footer-logo">
+                                    <a href="#"><img src="img/core-img/logo.png" alt="logo"> CV Flare </a>
+                                </div>
+                                <p>Trình tạo CV hoàn hảo của chúng tôi giúp bạn thoát khỏi rắc rối khi viết CV. Chọn từ nhiều mẫu khác nhau và làm theo hướng dẫn đơn giản để tạo CV sẵn sàng cho công việc.</p>
+                            </div>
+                            <!-- Biểu tượng mạng xã hội -->
+                            <div class="footer-social-info fadeInUp" data-wow-delay="0.4s">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-3 col-md-6">
+                        <div class="contact_info_area d-sm-flex justify-content-between">
+                            <!-- Thông tin -->
+                            <div class="contact_info mt-x text-center fadeInUp" data-wow-delay="0.3s">
+                                <h5>CHÍNH SÁCH & ĐIỀU KHOẢN</h5>
+                                <a href="#">
+                                    <p>Thỏa Thuận Quảng Cáo</p>
+                                </a>
+                                <a href="#">
+                                    <p>Chính Sách Sử Dụng Hợp Lý</p>
+                                </a>
+                                <a href="#">
+                                    <p>Chính Sách Bảo Mật</p>
+                                </a>
+                                <a href="#">
+                                    <p>Bảo Mật Công Nghệ</p>
+                                </a>
+                                <a href="#">
+                                    <p>Thỏa Thuận Nhà Phát Triển</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-2 col-md-6">
+                        <!-- Thông tin điều hướng -->
+                        <div class="contact_info_area d-sm-flex justify-content-between">
+                            <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.2s">
+                                <h5>ĐIỀU HƯỚNG</h5>
+                                <a href="#">
+                                    <p>Quảng Cáo</p>
+                                </a>
+                                <a href="#">
+                                    <p>Nhà Phát Triển</p>
+                                </a>
+                                <a href="#">
+                                    <p>Tài Nguyên</p>
+                                </a>
+                                <a href="#">
+                                    <p>Công Ty</p>
+                                </a>
+                                <a href="#">
+                                    <p>Kết Nối</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-3 col-md-6">
+                        <div class="contact_info_area d-sm-flex justify-content-between">
+                            <!-- Thông tin liên hệ -->
+                            <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.4s">
+                                <h5>LIÊN HỆ CHÚNG TÔI</h5>
+                                <p>Địa chỉ: xx00 E. Union Ave</p>
+                                <p>Phòng 1100. Denver, CO 80237</p>
+                                <p>+999 90932 627</p>
+                                <p>support@yourdomain.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+    <!-- ##### Khu vực chân trang kết thúc ##### -->
+    <!-- ########## All JS ########## -->
+    <!-- jQuery js -->
+    <script src="~/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="~/js/plugins.js"></script>
+    <!-- Parallax js -->
+    <script src="~/js/dzsparallaxer.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.syotimer.min.js"></script>
+
+    <!-- script js -->
+    <script src="~/js/script.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

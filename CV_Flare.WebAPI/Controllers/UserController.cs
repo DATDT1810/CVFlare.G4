@@ -1,5 +1,9 @@
-﻿using CV_Flare.Application.DTOs;
+﻿using AutoMapper.Internal;
+using Azure.Core;
+using CV_Flare.Application.DTOs;
 using CV_Flare.Application.Interface.Account;
+using CV_Flare.Application.Interface.Email;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -11,11 +15,12 @@ namespace CV_Flare.WebAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        //private readonly IEmailService emailService;
+        private readonly IEmailService _emailService;
 
-        public UserController(IAccountService accountService)
+        public UserController(IAccountService accountService, IEmailService emailService)
         {
             _accountService = accountService;
+            _emailService = emailService;
         }
 
 
@@ -34,6 +39,26 @@ namespace CV_Flare.WebAPI.Controllers
                         refreshToken = result.RefreshToken,
                     };
                     return Ok(result);
+                }
+            }
+            return Unauthorized("Invalid credentials");
+        }
+
+        [HttpPost]
+        [Route("LoginWithGoogle")]
+        public async Task<IActionResult> LoginWithGoogle([FromBody] EmailDTO emailDTO)
+        {
+            if (emailDTO.email != null)
+            {
+                var result = await _accountService.LoginGoogle(emailDTO.email);
+                if (result != null)
+                {
+                    var token = new
+                    {
+                        AccessToken = result.AccessToken,
+                        RefreshToken = result.RefreshToken
+                    };
+                    return Ok(token);
                 }
             }
             return Unauthorized("Invalid credentials");
@@ -97,12 +122,52 @@ namespace CV_Flare.WebAPI.Controllers
             return BadRequest();
         }
 
+        [HttpPost]
+        [Route("CheckEmail")]
+        public async Task<IActionResult> CheckEmail([FromBody] EmailDTO emailDTO)
+        {
+            if (emailDTO.email != null)
+            {
+                var result = await _accountService.CheckEmail(emailDTO.email);
+                if (result != null)
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Route("SendCode")]
+        public async Task<IActionResult> SendCode(EmailDTO emailDTO)
+        {
+            if (emailDTO != null)
+            {
+                MailRequest mailRequest = new MailRequest();
+                mailRequest.ToEmail = emailDTO.email;
+                mailRequest.Subject = "Reset Password";
+
+                // tạo mã code 6 số lưu vào session
+                var code = new Random().Next(100000, 999999).ToString();
+                HttpContext.Session.SetString("code", code);
+
+                string content = "This is the verify code to reset your password";
+                mailRequest.Body = _emailService.GetCodeHtmlContent(content, code); ;
+                await _emailService.SendEmailAsync(mailRequest);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetAllUser()
         {
             var userList = await _accountService.GetAllUserAsync();
             return Ok(userList);
         }
+
+
         [HttpGet("{id}", Name = "GetUserById")]
         public async Task<IActionResult> GetUserById(int id)
         {
@@ -110,5 +175,45 @@ namespace CV_Flare.WebAPI.Controllers
             if (user == null) return NotFound();
             return Ok(user);
         }
+
+        [HttpGet]
+        [Route("GetUserProfile")]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.Email);
+            //var userId = "datdtce171751@fpt.edu.vn"; // test api
+            if (userId != null)
+            {
+                var userProfile = await _accountService.GetUserProfile(userId);
+                if (userProfile != null) return Ok(userProfile);
+            }
+            return NotFound();
+            //var user = await _accountService.GetUserByEmailAsync(email);
+            //if (user == null) return NotFound();
+            //return Ok(user);
+        }
+
+        //[Authorize]
+        [HttpPost]
+        [Route("UpdateUserProfile")]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UserProfileDTO userProfileDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var updateProfile = await _accountService.UpdateUserProfile(userProfileDTO);
+                return Ok(updateProfile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, "An error occurred while updating the profile.");
+            }
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CV_Flare.Application.DTOs;
 using CV_Flare.Application.Interface.Account;
 using CV_FLare.Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,11 @@ namespace CV_Flare.Application.Services.Account
             return _accountRepository.GetUserByIdAsync(id);
         }
 
+        public Task<UserProfileDTO> GetUserProfile(string email)
+        {
+            return _accountRepository.GetUserProfile(email);
+        }
+
         public Task<TokenResponseDTO> Login(AccountDTO accountDTO)
         {
             return _accountRepository.Login(accountDTO);
@@ -68,5 +74,15 @@ namespace CV_Flare.Application.Services.Account
         {
             return _accountRepository.ResetPassword(email, password);
         }
+
+        public Task<UserProfileDTO> UpdateUserProfile(UserProfileDTO userProfileDTO)
+        {
+            return _accountRepository.UpdateUserProfile(userProfileDTO);
+        }
+
+        //public async Task<string> UploadUserImageAsync(IFormFile file, string email)
+        //{
+        //    return await _accountRepository.UploadUserImageAsync(file, email);
+        //}
     }
 }

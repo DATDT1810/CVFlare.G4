@@ -1,0 +1,53 @@
+﻿@page
+@model CV_Flare.RazorPage.Pages.UploadCVModel
+@{
+    ViewData["Title"] = "Upload CV";
+}
+<link rel="stylesheet" href="~/css/uploadcv.css">
+<div class="container container_box">
+    <img src="img/core-img/process.png" alt="">
+    <div class="job-upload-container">
+        <h3>Mô tả công việc</h3>
+        <textarea placeholder="Nhập nội dung mô tả công việc tại đây..." rows="5" cols="10"></textarea>
+        <div class="file-upload-section">
+            <p style="margin-top: 10px;">Hoặc tải lên tệp mô tả:</p>
+            <input type="file" id="fileUpload" accept=".doc,.docx,.pdf">
+        </div>
+        <button class="upload-btn">Tải lên mô tả</button>
+    </div>
+    <div class="upload-container">
+        <div class="upload-section" id="dropZone">
+            <div class="upload-content">
+                <i class="fa fa-cloud-upload" style="font-size: 40px; color: #999;"></i>
+                <h4>Tải lên CV từ máy tính, chọn hoặc kéo thả</h4>
+                <p>Hỗ trợ định dạng .doc, .docx, pdf có kích thước dưới 5MB</p>
+                <button id="chooseFileButton" class="choose-file-btn">Chọn CV</button>
+            </div>
+            <input type="file" id="fileInput" style="display: none;">
+        </div>
+        <button class="upload-btn">Tải CV lên</button>
+    </div>
+    <div class="features">
+        <div class="feature-card">
+            <h3>Nhận về các cơ hội tốt nhất</h3>
+            <p>
+                CV của bạn sẽ được ưu tiên hiển thị với các nhà tuyển dụng đã xác thực. Nhận được lời mời với
+                những cơ hội việc làm hấp dẫn từ các doanh nghiệp uy tín.
+            </p>
+        </div>
+        <div class="feature-card">
+            <h3>Theo dõi số liệu, tối ưu CV</h3>
+            <p>
+                Theo dõi số lượt xem CV. Biết chính xác nhà tuyển dụng nào trên nền tảng quan tâm đến CV của bạn.
+            </p>
+        </div>
+        <div class="feature-card">
+            <h3>Chia sẻ CV bất cứ nơi đâu</h3>
+            <p>Upload một lần và sử dụng đường link gửi tới nhiều nhà tuyển dụng.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Kết nối nhanh chóng với nhà tuyển dụng</h3>
+            <p>Dễ dàng kết nối với các nhà tuyển dụng nào xem và quan tâm tới CV của bạn.</p>
+        </div>
+    </div>
+</div>

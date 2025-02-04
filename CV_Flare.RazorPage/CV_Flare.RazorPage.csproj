@@ -8,7 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="jose-jwt" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\userImg\" />
   </ItemGroup>
 
 </Project>

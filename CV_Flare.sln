@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV_Flare.WebAPI", "CV_Flare
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV_Flare.Infrastructure", "CV_Flare.Infrastructure\CV_Flare.Infrastructure.csproj", "{E63F3BA4-FDF8-4794-A3EC-095FF727DDD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV_Flare.RazorPage", "CV_Flare.RazorPage\CV_Flare.RazorPage.csproj", "{96181907-1DA0-4DDE-B303-1A62EC2C61E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV_Flare.RazorPage", "CV_Flare.RazorPage\CV_Flare.RazorPage.csproj", "{96181907-1DA0-4DDE-B303-1A62EC2C61E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

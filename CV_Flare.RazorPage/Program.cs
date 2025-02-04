@@ -1,5 +1,7 @@
 ﻿using CV_Flare.RazorPage.Helper;
 using CV_Flare.RazorPage.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
@@ -27,6 +29,20 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true; // Đảm bảo chỉ có thể truy cập Session cookie qua HTTP
     options.Cookie.IsEssential = true; // Cần thiết cho hoạt động của ứng dụng
 });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+
+}).AddCookie().AddGoogle(options =>
+{
+    options.ClientId = builder.Configuration.GetSection("GoogleAuthSetting").GetValue<string>("ClientId");
+    options.ClientSecret = builder.Configuration.GetSection("GoogleAuthSetting").GetValue<string>("ClientSecret");
+    options.CallbackPath = "/signin-google";
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
