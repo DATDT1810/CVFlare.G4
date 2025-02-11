@@ -31,7 +31,7 @@ namespace CV_Flare.WebAPI.Controllers
         public async Task<IActionResult> GetPackagesCVById(int id)
         {
             var packagesCV = await _packagesCVService.GetPackagesCVById(id);
-            if(packagesCV == null) return NotFound();
+            if (packagesCV == null) return NotFound();
             return Ok(packagesCV);
         }
 
@@ -41,15 +41,15 @@ namespace CV_Flare.WebAPI.Controllers
             if (packagesDTO == null) return BadRequest();
             var newPackagesCV = _mapper.Map<Package>(packagesDTO);
             var packagesCV = await _packagesCVService.AddPackagesCV(newPackagesCV);
-            return Ok(packagesCV);  
+            return Ok(packagesCV);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePackagesCV(int id,  [FromBody] PackagesDTO packagesDTO)
+        public async Task<IActionResult> UpdatePackagesCV(int id, [FromBody] PackagesDTO packagesDTO)
         {
-            if(packagesDTO == null) return BadRequest();
+            if (packagesDTO == null) return BadRequest();
             Package obj = await _packagesCVService.GetPackagesCVById(id);
-            if(obj == null) return NotFound();
+            if (obj == null) return NotFound();
             var update = _mapper.Map<Package>(packagesDTO);
             await _packagesCVService.UpdatePackagesCV(id, update);
             return Ok(obj);
@@ -59,7 +59,7 @@ namespace CV_Flare.WebAPI.Controllers
         public async Task<IActionResult> DeletePackagesCV(int id)
         {
             Package obj = await _packagesCVService.GetPackagesCVById(id);
-            if(obj == null) return NotFound();
+            if (obj == null) return NotFound();
             await _packagesCVService.DeletePackagesCV(id);
             return NoContent();
         }

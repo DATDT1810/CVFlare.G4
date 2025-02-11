@@ -27,11 +27,6 @@ public class UserTemplate
     [Required]
     public string TemplateContent { get; set; } = null!;
 
-    public int JobDescId { get; set; }
-
-    [ForeignKey("JobDescId")]
-    public virtual JobDescription JobDesc { get; set; } = null!;
-
     public int AiScore { get; set; }
 
     public bool IsDraft { get; set; }

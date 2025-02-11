@@ -12,6 +12,7 @@ namespace CV_Flare.Application.Services.PackagesCV
     {
         private readonly IPackagesCVRepository _packagesCVRepository;
 
+
         public PackagesCVService(IPackagesCVRepository packagesCVRepository)
         {
             _packagesCVRepository = packagesCVRepository;

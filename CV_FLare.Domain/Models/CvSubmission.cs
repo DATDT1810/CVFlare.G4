@@ -20,9 +20,7 @@ public partial class CvSubmission
 
     public string? FilePath { get; set; }
 
-    public int JobDescId { get; set; }
-    [ForeignKey("JobDescId")]
-    public virtual JobDescription? JobDesc { get; set; }
+    public string JobDescripion { get; set; }
 
     public double? AiScore { get; set; }
 

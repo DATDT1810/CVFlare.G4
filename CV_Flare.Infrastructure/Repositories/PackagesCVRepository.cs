@@ -46,7 +46,7 @@ namespace CV_Flare.Infrastructure.Repositories
         public async Task<Package> GetPackagesCVById(int id)
         {
             var packagesCV = await _context.Packages.FindAsync(id);
-            if(packagesCV == null)
+            if (packagesCV == null)
             {
                 throw new KeyNotFoundException($"Package with ID {id} not found.");
             }
@@ -64,7 +64,7 @@ namespace CV_Flare.Infrastructure.Repositories
             existingPackagesCV.PackageDescription = package.PackageDescription;
             existingPackagesCV.PackagePrice = package.PackagePrice;
             existingPackagesCV.UpdateAt = DateTime.UtcNow;
-             _context.Packages.Update(package);
+            _context.Packages.Update(package);
             await _context.SaveChangesAsync();
             return existingPackagesCV;
         }

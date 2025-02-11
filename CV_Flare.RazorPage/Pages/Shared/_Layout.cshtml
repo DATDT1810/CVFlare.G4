@@ -52,14 +52,13 @@
                         <!-- Menu bắt đầu -->
                         <div class="classynav">
                             <ul class="classynav">
-                                <li><a asp-page="/Job">Công việc</a></li>
                                 <li class="nav-item dropdown hoverable">
                                     <a class="nav-link dropdown-toggle nav_header" id="navbarDropdown" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Dịch Vụ
                                     </a>
                                     <div class="dropdown-menu tdropdown" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" asp-page="/Template">Tạo CV</a>
+                                        <a class="dropdown-item" asp-page="/Templates/template-cv">Tạo CV</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" asp-page="/Packages/PackagesCV">Chỉnh sửa CV</a>
                                     </div>
@@ -120,83 +119,43 @@
         <div class="footer-content-area mt-0">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-lg-4 col-md-6">
+                    <div class="col-12 col-lg-5 col-md-6">
                         <div class="footer-copywrite-info">
                             <!-- Bản quyền -->
                             <div class="copywrite_text fadeInUp" data-wow-delay="0.2s">
                                 <div class="footer-logo">
-                                    <a href="#"><img src="img/core-img/logo.png" alt="logo"> CV Flare </a>
+                                    <a href="#"><img src="~/img/core-img/logo.png" alt="logo"> CV Flare </a>
                                 </div>
                                 <p>Trình tạo CV hoàn hảo của chúng tôi giúp bạn thoát khỏi rắc rối khi viết CV. Chọn từ nhiều mẫu khác nhau và làm theo hướng dẫn đơn giản để tạo CV sẵn sàng cho công việc.</p>
                             </div>
                             <!-- Biểu tượng mạng xã hội -->
                             <div class="footer-social-info fadeInUp" data-wow-delay="0.4s">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-3 col-md-6">
-                        <div class="contact_info_area d-sm-flex justify-content-between">
-                            <!-- Thông tin -->
-                            <div class="contact_info mt-x text-center fadeInUp" data-wow-delay="0.3s">
-                                <h5>CHÍNH SÁCH & ĐIỀU KHOẢN</h5>
-                                <a href="#">
-                                    <p>Thỏa Thuận Quảng Cáo</p>
-                                </a>
-                                <a href="#">
-                                    <p>Chính Sách Sử Dụng Hợp Lý</p>
-                                </a>
-                                <a href="#">
-                                    <p>Chính Sách Bảo Mật</p>
-                                </a>
-                                <a href="#">
-                                    <p>Bảo Mật Công Nghệ</p>
-                                </a>
-                                <a href="#">
-                                    <p>Thỏa Thuận Nhà Phát Triển</p>
-                                </a>
+                                <a href="https://www.facebook.com/profile.php?id=61567322086347"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 col-lg-2 col-md-6">
-                        <!-- Thông tin điều hướng -->
                         <div class="contact_info_area d-sm-flex justify-content-between">
-                            <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.2s">
-                                <h5>ĐIỀU HƯỚNG</h5>
-                                <a href="#">
-                                    <p>Quảng Cáo</p>
-                                </a>
-                                <a href="#">
-                                    <p>Nhà Phát Triển</p>
-                                </a>
-                                <a href="#">
-                                    <p>Tài Nguyên</p>
-                                </a>
-                                <a href="#">
-                                    <p>Công Ty</p>
-                                </a>
-                                <a href="#">
-                                    <p>Kết Nối</p>
-                                </a>
+                            <!-- Thông tin liên hệ -->
+                            <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.4s">
+                                <h5>DỊCH VỤ</h5>
+                                <p>Tạo CV</p>
+                                <p>Chỉnh sửa CV</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-3 col-md-6">
+                    <div class="col-12 col-lg-5 col-md-6">
                         <div class="contact_info_area d-sm-flex justify-content-between">
                             <!-- Thông tin liên hệ -->
                             <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.4s">
                                 <h5>LIÊN HỆ CHÚNG TÔI</h5>
-                                <p>Địa chỉ: xx00 E. Union Ave</p>
-                                <p>Phòng 1100. Denver, CO 80237</p>
-                                <p>+999 90932 627</p>
-                                <p>support@yourdomain.com</p>
+                                <p>Địa chỉ: Số 600 đường Nguyễn Văn Cừ, Phường An Bình, Quận Ninh Kiều, TP. Cần Thơ</p>
+                                <p>+84 906 070 678</p>
+                                <p>cvflare.ct@gmail.com</p>
                             </div>
                         </div>
                     </div>

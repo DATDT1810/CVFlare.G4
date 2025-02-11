@@ -26,6 +26,12 @@ namespace CV_Flare.Infrastructure.Helper
 
             // Mapping Packages
             CreateMap<Package, PackagesDTO>().ReverseMap();
+
+            // Mapping Templates
+            CreateMap<Template, TemplatesDTO>().ReverseMap();
+
+            // Mapping cvsub
+            CreateMap<CvSubmission, CvSubmissionDTO>().ReverseMap();
         }
     }
 }
