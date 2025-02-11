@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -15,6 +19,10 @@
     <ProjectReference Include="..\CV_Flare.Application\CV_Flare.Application.csproj" />
     <ProjectReference Include="..\CV_FLare.Domain\CV_FLare.Domain.csproj" />
     <ProjectReference Include="..\CV_Flare.Infrastructure\CV_Flare.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
 
 </Project>

@@ -22,6 +22,7 @@ namespace CV_Flare.Application.Interface.Account
 
         Task<IEnumerable<User>> GetAllUserAsync();
         Task<User> GetUserByEmailAsync(string email);
+        Task<User> GetUserById(string id);
         Task<User> GetUserByIdAsync(int id);
 
         Task<UserProfileDTO> GetUserProfile(string email);

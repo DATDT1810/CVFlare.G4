@@ -13,6 +13,8 @@ public class Package
     [Required]
     [MaxLength(100)]
     public string PackageName { get; set; }
+
+    public bool isDeleted { get; set; }
     [Required]
     public string PackageDescription { get; set; }
 
@@ -27,5 +29,4 @@ public class Package
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual ICollection<ServiceRating> ServiceRatings { get; set; } = new List<ServiceRating>();
 }

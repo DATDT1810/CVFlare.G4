@@ -39,7 +39,7 @@ namespace CV_Flare.Infrastructure.Repositories
             _config = config;
             _mapper = mapper;
             _roleManager = roleManager;
-            }
+        }
 
         public async Task<string> CheckEmail(string email)
         {
@@ -139,7 +139,7 @@ namespace CV_Flare.Infrastructure.Repositories
                     }
                 }
             }
-           
+
             var result = await _signInManager.CanSignInAsync(user);
             var token = await GenerateAccessToken(user);
             if (token != null)
@@ -158,6 +158,7 @@ namespace CV_Flare.Infrastructure.Repositories
             var authClaims = new List<Claim>
              {
                  new Claim(ClaimTypes.Email, identityUser.Email),
+                 new Claim(JwtRegisteredClaimNames.Sub, identityUser.Id),
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
              };
             var userRole = await _userManager.GetRolesAsync(identityUser);
@@ -179,7 +180,7 @@ namespace CV_Flare.Infrastructure.Repositories
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
             var refreshToken = GenerateRefreshToken();
 
-            await _userManager.SetAuthenticationTokenAsync(identityUser, "TripEnjoy", "RefreshToken", refreshToken.RefreshToken);
+            await _userManager.SetAuthenticationTokenAsync(identityUser, "CVFlare", "RefreshToken", refreshToken.RefreshToken);
 
 
             return new TokenResponseDTO
@@ -389,6 +390,14 @@ namespace CV_Flare.Infrastructure.Repositories
             throw new Exception("No changes were made to the user profile.");
         }
 
-
+        public async Task<User> GetUserById(string id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.AspUId == id);
+            if (user == null)
+            {
+                throw new Exception($"Account with ID {id} not found.");
+            }
+            return user;
+        }
     }
 }

@@ -36,13 +36,9 @@ namespace CV_Flare.Infrastructure.DB
 
         public DbSet<CvSubmission> CvSubmissions { get; set; }
 
-        public  DbSet<JobDescription> JobDescriptions { get; set; }
-
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Package> Packages { get; set; }
-
-        public DbSet<ServiceRating> ServiceRatings { get; set; }
 
         public DbSet<Template> Templates { get; set; }
 

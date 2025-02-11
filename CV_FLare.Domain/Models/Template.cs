@@ -8,6 +8,7 @@ public partial class Template
     public int TemplateId { get; set; }
 
     public string? TemplateName { get; set; }
+    public bool isDeleted { get; set; }
 
     public string? PreviewImg { get; set; }
 

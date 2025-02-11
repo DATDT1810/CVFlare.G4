@@ -51,7 +51,5 @@ public class User
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual ICollection<ServiceRating> ServiceRatings { get; set; } = new List<ServiceRating>();
-
     public virtual ICollection<UserTemplate> UserTemplates { get; set; } = new List<UserTemplate>();
 }

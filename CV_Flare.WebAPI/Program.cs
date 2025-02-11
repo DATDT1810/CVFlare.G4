@@ -4,12 +4,17 @@ using CV_Flare.Application.Interface.Account;
 using CV_Flare.Application.Interface.CV;
 using CV_Flare.Application.Interface.Email;
 using CV_Flare.Application.Interface.PackagesCV;
+using CV_Flare.Application.Interface.Templates;
 using CV_Flare.Application.Services.Account;
+using CV_Flare.Application.Services.CvSubmission;
 using CV_Flare.Application.Services.Email;
 using CV_Flare.Application.Services.PackagesCV;
+using CV_Flare.Application.Services.Templates;
 using CV_Flare.Infrastructure.DB;
 using CV_Flare.Infrastructure.Helper;
 using CV_Flare.Infrastructure.Repositories;
+
+//using CV_Flare.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +72,10 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPackagesCVRepository, PackagesCVRepository>();
 builder.Services.AddScoped<IPackagesCVService, PackagesCVService>();
+builder.Services.AddScoped<ITemplatesRepository, TemplatesRepository>();
+builder.Services.AddScoped<ITemplatesService, TemplateService>();
+builder.Services.AddScoped<ICvSubmissionRepository, CvSubmisstionRepository>();
+builder.Services.AddScoped<ICvSubmissionService, CvSubmissionService>();
 
 
 // Add controllers

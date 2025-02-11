@@ -35,6 +35,11 @@ namespace CV_Flare.Application.Services.Account
             return _accountRepository.GetUserByEmailAsync(email);
         }
 
+        public async Task<User> GetUserById(string id)
+        {
+            return await _accountRepository.GetUserById(id);
+        }
+
         public Task<User> GetUserByIdAsync(int id)
         {
             return _accountRepository.GetUserByIdAsync(id);

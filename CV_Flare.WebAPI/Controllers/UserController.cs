@@ -176,6 +176,14 @@ namespace CV_Flare.WebAPI.Controllers
             return Ok(user);
         }
 
+        [HttpGet("uid/{id}")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            var user = await _accountService.GetUserById(id);
+            if (user == null) return NotFound();
+            return Ok(user);
+        }
+
         [HttpGet]
         [Route("GetUserProfile")]
         public async Task<IActionResult> GetUserProfile()
