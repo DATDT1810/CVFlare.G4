@@ -50,7 +50,7 @@ namespace CV_Flare.Infrastructure.Repositories
             entity.Status = "Submitted";
             entity.UploadedAt = DateTime.UtcNow;
 
-            _context.CvSubmissions.Add(entity);
+             _context.CvSubmissions.Add(entity);
             await _context.SaveChangesAsync();
 
             return _mapper.Map<CvSubmissionDTO>(entity);
