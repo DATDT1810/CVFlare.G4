@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace CV_Flare.RazorPage.Pages
@@ -72,8 +73,20 @@ namespace CV_Flare.RazorPage.Pages
                     ModelState.AddModelError("LoginVM.email", "Invalid login attempt.");
                     return Page();
                 }
-
+                // Lưu token vào session
                 await _tokenServices.SetTokens(tokenResponse.AccessToken, tokenResponse.RefreshToken);
+                // Giải mã token để kiểm tra vai trò
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(tokenResponse.AccessToken);
+
+                // Kiểm tra xem người dùng có vai trò là admin không
+                var roleClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "role");
+                if (roleClaim != null && roleClaim.Value == "Admin")
+                {
+                    // Nếu là admin, chuyển hướng đến trang quản trị
+                    return RedirectToPage("/Admin/Index");
+                }
+
                 TempData["Success"] = "true";
                 return RedirectToPage(UrlPageFrom);
             }
