@@ -83,7 +83,7 @@ namespace CV_Flare.WebAPI.Controllers
 
         [HttpPost]
         [Route("Logout")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             var user = User.FindFirstValue(ClaimTypes.Email);

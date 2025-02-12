@@ -158,7 +158,7 @@ namespace CV_Flare.Infrastructure.Repositories
             var authClaims = new List<Claim>
              {
                  new Claim(ClaimTypes.Email, identityUser.Email),
-                 new Claim(JwtRegisteredClaimNames.Sub, identityUser.Id),
+                 new Claim(ClaimTypes.NameIdentifier, identityUser.Id),
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
              };
             var userRole = await _userManager.GetRolesAsync(identityUser);

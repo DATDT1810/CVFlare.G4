@@ -16,6 +16,7 @@ namespace CV_Flare.RazorPage.Pages
         public UploadCVModel(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
+
         }
 
         [BindProperty]
@@ -24,7 +25,15 @@ namespace CV_Flare.RazorPage.Pages
         [BindProperty]
         public IFormFile CVFile { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        [FromQuery]
+        public int PackageId { get; set; }
+
+        public void OnGet(int packageId)
+        {
+            PackageId = packageId;
+        }
+
+        public async Task<IActionResult> OnPostAsync(int packageId)
         {
             if (CVFile == null || CVFile.Length == 0)
             {
@@ -32,16 +41,19 @@ namespace CV_Flare.RazorPage.Pages
                 return Page();
             }
 
-            var userId = "7";
+            var userId = "0";
             if (string.IsNullOrEmpty(userId))
             {
                 return Unauthorized();
             }
 
             CvSubmissionVM.UserId = int.Parse(userId);
-            CvSubmissionVM.PackageId = 1; // Bạn có thể nhận giá trị này từ URL hoặc Session
+            CvSubmissionVM.PackageId = PackageId;
 
-            using (var client = _httpClientFactory.CreateClient())
+            // Create HttpClient and set timeout before using
+            var client = _httpClientFactory.CreateClient("DefaultClient");
+
+            client.Timeout = TimeSpan.FromMinutes(2); // Set timeout here
             using (var content = new MultipartFormDataContent())
             {
                 // Thêm các trường dữ liệu cần thiết (đảm bảo key trùng khớp với DTO của API)
