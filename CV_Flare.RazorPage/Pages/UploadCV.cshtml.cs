@@ -33,7 +33,7 @@ namespace CV_Flare.RazorPage.Pages
             PackageId = packageId;
         }
 
-        public async Task<IActionResult> OnPostAsync(int packageId)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (CVFile == null || CVFile.Length == 0)
             {
@@ -72,6 +72,7 @@ namespace CV_Flare.RazorPage.Pages
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["Success"] = true;
                     ViewData["CVStatus"] = "Tải lên CV thành công!";
                 }
                 else

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace CV_Flare.RazorPage.Pages
@@ -80,11 +81,15 @@ namespace CV_Flare.RazorPage.Pages
                 var jwtToken = handler.ReadJwtToken(tokenResponse.AccessToken);
 
                 // Kiểm tra xem người dùng có vai trò là admin không
-                var roleClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "role");
+                var roleClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
                 if (roleClaim != null && roleClaim.Value == "Admin")
                 {
                     // Nếu là admin, chuyển hướng đến trang quản trị
-                    return RedirectToPage("/Admin/Index");
+                    return RedirectToPage("/Admin/Dashboard");
+                }
+                else if (roleClaim != null && roleClaim.Value == "User")
+                {
+                    return RedirectToPage("/Index");
                 }
 
                 TempData["Success"] = "true";
