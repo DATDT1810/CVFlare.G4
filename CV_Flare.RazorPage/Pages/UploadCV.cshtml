@@ -8,12 +8,6 @@
 <div class="container" style="margin: 100px">
     <h2>Upload CV và Mô tả Công việc</h2>
 
-    <!-- Hiển thị thông báo thành công hoặc lỗi -->
-    <div>
-        <p>@ViewData["CVStatus"]</p>
-        <p>@ViewData["JobDescriptionStatus"]</p>
-    </div>
-
     <form method="post" enctype="multipart/form-data">
         <!-- Mô tả công việc -->
         <div class="form-group">
@@ -31,5 +25,18 @@
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="~/js/uploadcv.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var isSuccess = @(TempData["Success"] != null && TempData["Success"].ToString().ToLower() == "true" ? "true" : "false");
+
+        if (isSuccess) {
+            Swal.fire({
+                title: 'Upload Cv Successful!',
+                text: '',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+</script>
