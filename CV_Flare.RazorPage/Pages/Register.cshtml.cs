@@ -33,7 +33,7 @@ namespace CV_Flare.RazorPage.Pages
 
                 var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7000/api/User/Register");
                 request.Content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                var client = _httpClientFactory.CreateClient();
+                var client = _httpClientFactory.CreateClient("DefaultClient");
                 try
                 {
                     var response = await client.SendAsync(request);
