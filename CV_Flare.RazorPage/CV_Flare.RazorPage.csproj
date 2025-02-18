@@ -17,4 +17,9 @@
     <Folder Include="wwwroot\img\userImg\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CV_Flare.Application\CV_Flare.Application.csproj" />
+    <ProjectReference Include="..\CV_FLare.Domain\CV_FLare.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
