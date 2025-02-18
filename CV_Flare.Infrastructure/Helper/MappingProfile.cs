@@ -31,7 +31,7 @@ namespace CV_Flare.Infrastructure.Helper
             CreateMap<Template, TemplatesDTO>().ReverseMap();
 
             // Mapping cvsub
-            CreateMap<CvSubmission, CvSubmissionDTO>().ReverseMap();
+            CreateMap<CV_FLare.Domain.Models.CvSubmission, CvSubmissionDTO>().ReverseMap();
         }
     }
 }

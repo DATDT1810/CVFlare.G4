@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CV_Flare.RazorPage.ViewModels;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace CV_Flare.RazorPage.Pages
 {
@@ -19,8 +21,11 @@ namespace CV_Flare.RazorPage.Pages
 
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet =true)]
         public CvSubmissionVM CvSubmissionVM { get; set; } = new CvSubmissionVM();
+
+        [BindProperty(SupportsGet =true)]
+        public PackagesVM PackagesVM { get; set; }
 
         [BindProperty]
         public IFormFile CVFile { get; set; }
@@ -28,13 +33,33 @@ namespace CV_Flare.RazorPage.Pages
         [FromQuery]
         public int PackageId { get; set; }
 
-        public void OnGet(int packageId)
+        public async Task<IActionResult> OnGet(int packageId)
         {
             PackageId = packageId;
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://localhost:7000/api/PackagesCV/{packageId}");
+            var client = _httpClientFactory.CreateClient("DefaultClient");
+            var response = await client.SendAsync(request);
+            if(response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                PackagesVM = JsonConvert.DeserializeObject<PackagesVM>(content);
+            }
+            else
+            {
+                PackagesVM = null;
+            }
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (string.IsNullOrWhiteSpace(CvSubmissionVM.JobDescripion))
+            {
+                ViewData["CVStatus"] = "Mô tả công việc không được để trống.";
+                TempData["Success"] = false;
+                return Page();
+            }
+
             if (CVFile == null || CVFile.Length == 0)
             {
                 ViewData["CVStatus"] = "Vui lòng chọn một file PDF.";
@@ -59,7 +84,7 @@ namespace CV_Flare.RazorPage.Pages
                 // Thêm các trường dữ liệu cần thiết (đảm bảo key trùng khớp với DTO của API)
                 content.Add(new StringContent(CvSubmissionVM.UserId.ToString()), "UserId");
                 content.Add(new StringContent(CvSubmissionVM.PackageId.ToString()), "PackageId");
-                content.Add(new StringContent(CvSubmissionVM.JobDescripion ?? ""), "JobDescripion");
+                content.Add(new StringContent(CvSubmissionVM.JobDescripion), "JobDescripion");
                 content.Add(new StringContent("Submitted"), "Status");
 
                 // Gửi file với key "file" theo yêu cầu của API

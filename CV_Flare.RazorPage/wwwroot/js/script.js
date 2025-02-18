@@ -64,7 +64,7 @@
                 items: 1
             },
             991: {
-                    items: 3
+                    items: 2
                 },
             767:{
                     items: 1

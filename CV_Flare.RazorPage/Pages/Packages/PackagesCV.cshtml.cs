@@ -1,4 +1,4 @@
-﻿using CV_Flare.RazorPage.ViewModels;
+﻿    using CV_Flare.RazorPage.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;

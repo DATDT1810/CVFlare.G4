@@ -3048,9 +3048,6 @@ p.artficial:before{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
-.client_slides .owl-dot.active {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-}
 
 /* ##### 13.0 Team Area CSS ##### */
 
@@ -3465,7 +3462,7 @@ textarea:required {
     background-size: cover;
 }
 .footer-content-area{
-    padding: 80px 0;
+    padding: 60px 0;
     margin-top: 100px
 }
 .footer-logo{

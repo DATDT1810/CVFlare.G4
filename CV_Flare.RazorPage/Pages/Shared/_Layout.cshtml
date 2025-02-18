@@ -10,7 +10,6 @@
 
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="~/css/job.css">
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
 
     <!-- Owl Stylesheets -->
@@ -69,10 +68,20 @@
                                         Hồ sơ
                                     </a>
                                     <div class="dropdown-menu tdropdown" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="templates.html">Quản lý CV</a>
+                                        <a class="dropdown-item" asp-page="/User/CvManagement">Quản lý CV</a>
                                     </div>
                                 </li>
-                                <li><a asp-page="/AboutUs">Về Chúng Tôi</a></li>
+                                <li class="nav-item dropdown hoverable">
+                                    <a class="nav-link dropdown-toggle nav_header" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Về Chúng Tôi
+                                    </a>
+                                    <div class="dropdown-menu tdropdown" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-page="/AboutUs">Về CVFlare</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-page="/AboutUs">Về đội ngũ chuyên gia</a>
+                                    </div>
+                                </li>
                             </ul>
 
                             @{
