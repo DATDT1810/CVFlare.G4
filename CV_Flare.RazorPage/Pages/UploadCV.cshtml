@@ -5,38 +5,117 @@
 }
 <link rel="stylesheet" href="~/css/uploadcv.css">
 
-<div class="container" style="margin: 100px">
-    <h2>Upload CV và Mô tả Công việc</h2>
+<div class="container container_box">
+    <img src="~/img/core-img/process.png" alt="banner">
+    <h3 class="mt-4">@Model.PackagesVM.PackageName</h3>
+    <div class="package-description">
+        <div class="vertical-line"></div>
+        <p id="package-description-text">@Model.PackagesVM.PackageDescription</p>
+    </div>
 
-    <form method="post" enctype="multipart/form-data">
-        <!-- Mô tả công việc -->
-        <div class="form-group">
-            <label for="JobDescripion">Mô tả công việc (JD):</label>
-            <textarea id="JobDescripion" name="JobDescripion" class="form-control" placeholder="Nhập mô tả công việc..." rows="5"></textarea>
-        </div>
+    <h3 class="text-center mt-4">Upload CV và mô tả công việc</h3>
+    <div class="upload-container">
+        <form method="post" enctype="multipart/form-data">
+            <!-- Mô tả công việc -->
+            <div class="form-group">
+                <label for="JobDescripion">Mô tả công việc (JD):</label>
+                <textarea id="JobDescripion" name="JobDescripion" class="form-control" placeholder="Nhập mô tả công việc..." rows="5"></textarea>
+            </div>
 
-        <!-- Tải lên CV -->
-        <div class="form-group">
-            <label for="file">Tải lên CV(.pdf):</label>
-            <input type="file" id="file" name="CVFile" class="form-control" accept=".pdf">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Tải lên</button>
-    </form>
+            <!-- Tải lên CV -->
+             <div class="form-group">
+                 <label for="file">Tải lên CV(.pdf):</label>
+                 <input type="file" id="file" name="CVFile" class="form-control" accept=".pdf">
+             </div>
+           
+            <div class="upload-btn-container">
+                <button type="submit" class="upload-btn">Nộp CV</button>
+            </div>
+        </form>
+    </div>
+    
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var isSuccess = @(TempData["Success"] != null && TempData["Success"].ToString().ToLower() == "true" ? "true" : "false");
 
         if (isSuccess) {
             Swal.fire({
-                title: 'Upload Cv Successful!',
+                title: 'Upload Cv thành công!',
                 text: '',
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
         }
+        // Kích hoạt CKEditor cho textarea JD
+        CKEDITOR.replace('JobDescripion');
     });
 </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        CKEDITOR.replace('JobDescripion');
+
+        var form = document.querySelector("form");
+        form.addEventListener("submit", function (event) {
+            var jobDescription = CKEDITOR.instances.JobDescripion.getData().replace(/<[^>]*>/g, '').trim();
+            var cvFile = document.getElementById("file").files.length;
+
+            if (!jobDescription) {
+                event.preventDefault(); // Ngăn form submit
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: 'Mô tả công việc không được để trống.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (cvFile === 0) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: 'Vui lòng chọn một file PDF.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var descriptionElement = document.getElementById('package-description-text');
+        var descriptionText = descriptionElement.innerHTML;
+
+        // Tìm dấu chấm và cắt nội dung tại đó
+        var parts = descriptionText.split('.');
+
+        if (parts.length > 1) {
+            // Lấy phần đầu tiên và thêm vào gạch đầu dòng
+            var firstPart = parts[0].trim();
+            var bulletPoints = '<ul class="bullet-points"><li>' + firstPart + '.</li>';
+
+            // Tạo danh sách các gạch đầu dòng cho mỗi câu còn lại
+            bulletPoints += parts.slice(1).map(function (item) {
+                item = item.trim();
+                if (item) {
+                    return '<li>' + item + '.</li>';
+                }
+            }).filter(function (item) { return item !== undefined }).join('');
+
+            bulletPoints += '</ul>';
+
+            // Cập nhật nội dung cho phần mô tả
+            descriptionElement.innerHTML = bulletPoints;
+        }
+    });
+
+
+</script>
+

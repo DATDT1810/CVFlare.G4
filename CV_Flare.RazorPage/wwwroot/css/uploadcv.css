@@ -1,65 +1,57 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+﻿body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .container_box {
-  max-width: 900px;
-  margin-top: 100px;
-  padding: 20px;
-  text-align: center;
+    max-width: 900px;
+    margin-top: 100px;
+    padding: 20px;
 }
 
-.job-upload-container {
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 20px auto;
-  width: 100%;
-  max-width: 900px;
-  text-align: center;
-  background-color: #f9f9f9;
+.upload-container {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 900px;
+    background-color: #f9f9f9;
 }
 
 textarea {
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
-.file-upload-section {
-  margin-top: 15px;
-}
-
-#fileUpload{
-  font-size: 14px
+#fileUpload {
+    font-size: 14px
 }
 
 .choose-file-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .upload-section {
-  border: 2px dashed #ccc;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
 }
 
-.upload-section h1 {
-  color: #023047;
-}
+    .upload-section h1 {
+        color: #023047;
+    }
 
 .upload-btn {
-    margin-top: 20px;
     padding: 10px 30px;
     background-color: #219EBC;
     color: #fff;
@@ -67,26 +59,81 @@ textarea {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.upload-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
 .upload-btn:hover {
-  background-color: #3babde;
+    background-color: #3babde;
 }
 
-.features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 30px;
+h3.mt-4 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
 }
 
-.feature-card {
-  flex: 1 1 40%;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f0f4f8;
-  text-align: left;
+.package-description {
+    display: flex;
 }
 
-.feature-card h3 {
-  margin-bottom: 10px;
+.vertical-line {
+    width: 2px;
+    height: auto;
+    background-color: #000;
+    margin-right: 10px;
 }
+
+.package-description p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Định dạng cho phần tên package */
+h3.mt-4 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}
+
+.package-description {
+    display: flex;
+}
+
+.vertical-line {
+    width: 2px;
+    height: auto;
+    background-color: #000;
+    margin-right: 10px;
+}
+
+.package-description p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.bullet-points {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.bullet-points li {
+    list-style-type: none; 
+    color: #666;
+    font-size: 14px;
+    position: relative; 
+}
+
+        .bullet-points li::before {
+            content: "-";
+            position: absolute;
+            left: -20px;
+        }

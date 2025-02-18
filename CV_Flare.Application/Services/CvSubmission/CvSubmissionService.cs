@@ -19,13 +19,33 @@ namespace CV_Flare.Application.Services.CvSubmission
             _cvSubmissionRepository = cvSubmissionRepository;
         }
 
+        public async Task<CV_FLare.Domain.Models.CvSubmission> DeleteCvSubmission(int id)
+        {
+            return await _cvSubmissionRepository.DeleteCvSubmission(id);
+        }
+
+        public async Task<IEnumerable<CV_FLare.Domain.Models.CvSubmission>> GetAllCvByUserId(int userId)
+        {
+            return await _cvSubmissionRepository.GetAllCvByUserId(userId);
+        }
+
+        public async Task<IEnumerable<CV_FLare.Domain.Models.CvSubmission>> GetAllCvSubmission()
+        {
+            return await _cvSubmissionRepository.GetAllCvSubmission();
+        }
+
+        public async Task<CV_FLare.Domain.Models.CvSubmission> GetCvSubmissionById(int id)
+        {
+            return await _cvSubmissionRepository.GetCvSubmissionById(id);
+        }
+
+        public async Task<CV_FLare.Domain.Models.CvSubmission> GetCvSubmissionByIdandUserId(int id, int userId)
+        {
+            return await _cvSubmissionRepository.GetCvSubmissionByIdandUserId(id, userId);
+        }
+
         public async Task<CvSubmissionDTO> SubmitCvAsync(CvSubmissionDTO submission, IFormFile file)
         {
-            //var hasPackage = await _userPackageRepository.HasPurchasedPackage(submission.UserId, submission.PackageId);
-            //if (!hasPackage)
-            //{
-            //    throw new Exception("User has not purchased this package.");
-            //}
             return await _cvSubmissionRepository.SubmitCvAsync(submission, file);
         }
     }

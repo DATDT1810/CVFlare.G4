@@ -1,0 +1,95 @@
+﻿@page
+@model CV_Flare.RazorPage.Pages.User.CvManagementModel
+
+@{
+    ViewData["Title"] = "Quản lý CV";
+}
+
+<div class="container" style="margin-top: 100px">
+    <h2>Danh sách CV của bạn</h2>
+
+    @if (Model.CvSubmissionVM != null && Model.CvSubmissionVM.Any())
+    {
+        <div class="row">
+            <div class="col">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên CV</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cv in Model.CvSubmissionVM)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://img.icons8.com/ios/50/000000/file-pdf.png" alt="PDF" width="25" height="25" class="mr-2" />
+                                        @if (!string.IsNullOrEmpty(cv.FilePath))
+                                        {
+                                            @cv.FilePath
+                                        }
+                                        else
+                                        {
+                                            <span>Chưa có tệp</span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (cv.UploadedAt != null)
+                                    {
+                                        @cv.UploadedAt
+                                    }
+                                    else
+                                    {
+                                        <span>Chưa có ngày</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="/UploadedFiles/@cv.FilePath" class="btn btn-primary btn-sm" target="_blank">
+                                        Xem CV
+                                    </a>
+                                    <button class="btn btn-danger btn-sm ml-2" data-toggle="modal" data-target="#deleteModal-@cv.SubmissionId">
+                                        Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Chưa có CV nào được nộp.</p>
+    }
+</div>
+
+<!-- Modal Delete Confirmation -->
+@foreach (var cv in Model.CvSubmissionVM)
+{
+    <div class="modal fade" id="deleteModal-@cv.SubmissionId" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xóa CV</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn chắc chắn muốn xóa CV "@cv.FilePath" không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <form method="post" action="@Url.Page("/User/DeleteCv", new { id = cv.SubmissionId })">
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

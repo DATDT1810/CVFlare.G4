@@ -23,6 +23,57 @@ namespace CV_Flare.WebAPI.Controllers
             _accountService = accountService;
             _mapper = mapper;
         }
+        //[Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetAllCvSubmission()
+        {
+            var list = await _cvSubmissionService.GetAllCvSubmission();
+            return Ok(list);
+        }
+
+        [Authorize]
+        [HttpGet("GetAllCVSubmissionsById/{userId}")]
+        public async Task<IActionResult> GetAllCvSubmissionById(int userId)
+        {
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _accountService.GetUserById(id);
+
+            if (user != null)
+            {
+                var userID = user.UserId;
+
+                var list = await _cvSubmissionService.GetAllCvByUserId(userId);
+
+                if (list == null || !list.Any())
+                {
+                    return NotFound("No CV submissions found.");
+                }
+
+                return Ok(list);
+            }
+            else
+            {
+                return BadRequest("Invalid!");
+            }
+        }
+
+        //[Authorize]
+        [HttpGet("{id}", Name = "GetCvSubmissionById")]
+        public async Task<IActionResult> GetCvSubmissionById(int id)
+        {
+            var cv = await _cvSubmissionService.GetCvSubmissionById(id);
+            if(cv == null) return NotFound();
+            return Ok(cv);
+        }
+
+        //[Authorize]
+        [HttpGet("{id}/{userId}", Name = "GetCvSubmissionByIdandUserId")]
+        public async Task<IActionResult> GetCvSubmissionByIdandUserId(int id, int userId)
+        {
+            var cvId = await _cvSubmissionService.GetCvSubmissionByIdandUserId(id, userId);
+            return Ok(cvId);
+        }
+
         [Authorize]
         [HttpPost("submit")]
         public async Task<IActionResult> SubmitCvAsync([FromForm] CvSubmissionDTO submission, [FromForm] IFormFile file)
