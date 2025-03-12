@@ -16,7 +16,7 @@
     <h3 class="text-center mt-4">Upload CV và mô tả công việc</h3>
     <div class="upload-container">
         <form method="post" enctype="multipart/form-data">
-            <!-- Mô tả công việc -->
+            <!-- Mô tả công việc -->            
             <div class="form-group">
                 <label for="JobDescripion">Mô tả công việc (JD):</label>
                 <textarea id="JobDescripion" name="JobDescripion" class="form-control" placeholder="Nhập mô tả công việc..." rows="5"></textarea>
@@ -37,7 +37,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var isSuccess = @(TempData["Success"] != null && TempData["Success"].ToString().ToLower() == "true" ? "true" : "false");
