@@ -266,11 +266,11 @@ namespace CV_Flare.Infrastructure.Repositories
             if (identityResult.Succeeded)
             {
                 // Gán vai trò User
-                if (!await _roleManager.RoleExistsAsync(StaticUserRoles.Admin))
+                if (!await _roleManager.RoleExistsAsync(StaticUserRoles.User))
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.Admin));
+                    await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.User));
                 }
-                await _userManager.AddToRoleAsync(user, StaticUserRoles.Admin);
+                await _userManager.AddToRoleAsync(user, StaticUserRoles.User);
 
                 // Giao dịch thêm vào bảng Users và Wallets
                 using (var transaction = await _context.Database.BeginTransactionAsync())
@@ -283,7 +283,7 @@ namespace CV_Flare.Infrastructure.Repositories
                             UserEmail = accountDTO.Email,
                             UserPassword = accountDTO.Password,
                             UserFullname = "Anonymous Customer",
-                            UserRole = 2,
+                            UserRole = 1,
                             UserPhone = "+84",
                             UserImg = "",
                             UserCreateAt = DateTime.Now,

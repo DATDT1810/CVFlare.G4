@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CV_FLare.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CV_Flare.RazorPage.ViewModels
 {
@@ -7,6 +8,7 @@ namespace CV_Flare.RazorPage.ViewModels
         public int SubmissionId { get; set; }
         public int PackageId { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
         public string? FilePath { get; set; }
         public string JobDescripion { get; set; }
         public DateTime? DueDate { get; set; }

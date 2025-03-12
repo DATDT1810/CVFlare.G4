@@ -2934,7 +2934,7 @@ p.artficial:before{
 .icon_wrapper:after {
     content: '';
     border-right: 100px solid transparent;
-    border-top: 100px solid #3e94e4;
+    border-top: 100px solid #219EBC;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -2994,14 +2994,21 @@ p.artficial:before{
 }
 
 .testimonial_image {
-    height: 100px;
-    width: 100px;
+    height: 150px; 
+    width: 150px; 
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.testimonial_image > img {
-    border-radius: 50%;
-}
+    .testimonial_image > img {
+        border-radius: 50%; 
+        width: 100%; 
+        height: 100%;
+        object-fit: cover; 
+    }
+
 
 .testimonial_text > p {
     font-weight: 500;
@@ -3009,6 +3016,7 @@ p.artficial:before{
     margin-top: 20px;
     margin-bottom: 25px;
     font-size: 14px;
+    text-align: start;
 }
 
 .admin_text > h5 {
@@ -3098,10 +3106,11 @@ p.artficial:before{
 */
 .subscribe{
     position: relative;
-    padding: 50px 20px;
+    padding: 35px 20px;
     background: #fff;
     border-radius: 15px;
     overflow: hidden;
+    margin-bottom: 20px;
     box-shadow: 0 5px 40px 0 rgb(0 0 0 / 11%);
 }
 .custom{

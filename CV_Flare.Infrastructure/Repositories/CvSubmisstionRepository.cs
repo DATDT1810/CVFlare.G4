@@ -53,7 +53,7 @@ namespace CV_Flare.Infrastructure.Repositories
 
         public async Task<IEnumerable<CV_FLare.Domain.Models.CvSubmission>> GetAllCvSubmission()
         {
-            return await _context.CvSubmissions.ToListAsync();
+            return await _context.CvSubmissions.Include(u => u.User).ToListAsync();
         }
 
         public async Task<CV_FLare.Domain.Models.CvSubmission> GetCvSubmissionById(int id)

@@ -27,6 +27,7 @@ namespace CV_Flare.Infrastructure.DB
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=TANDAT\\MSSQLSERVER03;Database=CVFlareG4;uid=sa;pwd=1234;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True");
+            }
         }
 
 
